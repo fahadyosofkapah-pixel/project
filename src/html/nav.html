@@ -1,0 +1,100 @@
+
+ 
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+}
+
+.navbar {
+    background: #1e293b;
+    color: white;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 25px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.nav-links a:hover {
+    color: #38bdf8;
+}
+
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+    color: #1e293b;
+}
+
+.hero p {
+    color: #64748b;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .navbar {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+}
+</style>
+
+
+
+    <nav class="navbar">
+        <h2 class="logo">My Projects</h2>
+
+        <ul class="nav-links">
+            <li><a href="Memory-Card-Game/index.html">Memory Game</a></li>
+
+            <li><a href="Rock-Paper-Scissors/index.html">
+                Rock Paper Scissors ✊✋✌️
+            </a></li>
+
+               <li>
+           <a href="file:///D:/my-Portfolio/src/html/about.html">
+    Portfolio
+</a>
+            <li><a href="EVC-PLUS/index.html">EVC-PLUS</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>Welcome to My Projects</h1>
+        <p>Select a project from the navigation menu.</p>
+    </section>
+ 

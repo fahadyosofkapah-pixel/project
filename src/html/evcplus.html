@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+ <style>
+    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #e2e8f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+/* navbar */
+.navbar {
+    width: 100%;
+    min-height: 75px;
+    background: #1e293b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    gap: 20px;
+    flex-shrink: 0;
+}
+.logo {
+    color: white;
+    font-size: 25px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.nav-links a:hover {
+    color: #38bdf8;
+}
+/* EVC CONTAINER */
+
+.EVC {
+    width: 90%;
+    max-width: 420px;
+    margin: 40px auto;
+}
+
+/* MAIN BOX */
+
+.plus {
+    background: #ffffff;
+    padding: 30px 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    text-align: center;
+    border-top: 6px solid #008c45;
+}
+
+/* HEADING */
+
+.plus h1 {
+    color: #008c45;
+    font-size: 30px;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.plus hr {
+    border: none;
+    height: 2px;
+    background: #008c45;
+    margin-bottom: 25px;
+}
+
+/* INPUTS */
+
+.plus input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.plus input:focus {
+    border-color: #008c45;
+    box-shadow: 0 0 5px rgba(0, 140, 69, 0.3);
+}
+
+/* BUTTONS */
+
+.plus button {
+    width: 100%;
+    padding: 12px;
+    background: #008c45;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.plus button:hover {
+    background: #006b35;
+    transform: translateY(-2px);
+}
+
+/* RESULT AREA */
+
+#evc-result {
+    margin-top: 25px;
+    text-align: left;
+    color: #1e293b;
+}
+
+#evc-result h3 {
+    color: #008c45;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#evc-result p {
+    padding: 8px 10px;
+    margin: 5px 0;
+    background: #f1f5f9;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* RESULT INPUTS */
+
+#evc-result input {
+    width: 100%;
+    margin-top: 10px;
+}
+
+
+
+/* RESPONSIVE */
+
+@media (max-width: 480px) {
+
+    .plus {
+        padding: 25px 18px;
+    }
+
+    .plus h1 {
+        font-size: 25px;
+    }
+
+}
+@media (max-width: 750px) {
+    .navbar {
+        flex-direction: column;
+        padding: 20px 10px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+}
+</style>
+<body>
+    <!-- navbar -->
+            <!-- nav-bar -->
+<nav class="navbar">
+    <h2 class="logo">My Projects</h2>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="index.html" class="active">
+                Rock Paper Scissors 
+            </a>
+        </li>
+
+        <li>
+            <a href="../html/memory.html">
+                Memory Game
+            </a>
+        </li>
+
+        <li>
+      <a href="../html/evcplus.html">
+                EVC-PLUS
+            </a>
+        </li>
+
+        <li>
+           
+                    <a href="/html/index.html">
+    Portfolio
+</a>
+        </li>
+
+    </ul>
+</nav>
+<!-- evc-plus -->
+<div class="EVC">
+    <div class="plus">
+
+        <h1>EVC-PLUS</h1>
+        <hr>
+
+        <input
+            type="text"
+            id="evc-code"
+            placeholder="*770#"
+        >
+
+        <br>
+
+        <button id="evc-send">Send</button>
+
+        <div id="evc-result"></div>
+
+    </div>
+</div>
+<script>
+    
+const evcCode = document.getElementById("evc-code");
+const evcSend = document.getElementById("evc-send");
+const evcResult = document.getElementById("evc-result");
+
+let userPIN = "";
+let transferData = {};
+
+let selectedCode = "";
+
+
+// START EVC-PLUS
+evcSend.addEventListener("click", function () {
+
+    const code = evcCode.value.trim();
+
+    if (code === "*770#" || code === "*711#") {
+
+        selectedCode = code;
+
+        evcResult.innerHTML = `
+            <h3>Welcome to EVC-PLUS</h3>
+
+            <p>Fadlan geli PIN-kaaga</p>
+
+            <input
+                type="password"
+                id="login-pin"
+                maxlength="4"
+                placeholder="Enter PIN"
+            >
+
+            <br>
+
+            <button id="login-send">Continue</button>
+        `;
+
+        document.getElementById("login-send")
+            .addEventListener("click", login);
+
+    } else {
+
+        evcResult.textContent = "Fadlan garaac *770# ama *711#";
+
+    }
+
+});
+
+
+// LOGIN WITH PIN
+function login() {
+
+    const pin = document.getElementById("login-pin").value;
+
+    if (!/^\d{4}$/.test(pin)) {
+
+        alert("Fadlan geli PIN afar lambar ah");
+        return;
+
+    }
+
+    userPIN = pin;
+
+    if (selectedCode === "*711#") {
+
+        showBalance();
+
+    } else if (selectedCode === "*770#") {
+
+        showMenu();
+
+    }
+
+}
+
+
+// SHOW BALANCE ONLY
+function showBalance() {
+
+    evcResult.innerHTML = `
+        <h3>Haraagaaga</h3>
+
+        <h2 style="color: green; text-align: center;">
+            $100.00
+        </h2>
+    `;
+
+}
+
+
+// // 1. START EVC-PLUS
+// evcSend.addEventListener("click", function () {
+
+//     const code = evcCode.value.trim();
+
+//     if (code === "*770#") {
+
+//         evcResult.innerHTML = `
+//             <h3>Welcome to EVC-PLUS</h3>
+//             <p>Fadlan geli PIN-kaaga</p>
+
+//             <input type="password"
+//                 id="login-pin"
+//                 maxlength="4"
+//                 placeholder="Enter PIN">
+
+//             <br>
+
+//             <button id="login-send">Continue</button>
+//         `;
+
+//         document.getElementById("login-send")
+//             .addEventListener("click", login);
+
+//     } else {
+
+//         evcResult.textContent = "Fadlan garaac *770#";
+
+//     }
+
+// });
+
+
+// // 2. LOGIN WITH PIN
+// function login() {
+
+//     const pin = document.getElementById("login-pin").value;
+
+//     if (!/^\d{4}$/.test(pin)) {
+
+//         alert("Fadlan geli PIN afar lambar ah");
+//         return;
+
+//     }
+
+//     userPIN = pin;
+
+//     showMenu();
+
+// }
+
+
+// 3. MAIN MENU
+function showMenu() {
+
+    evcResult.innerHTML = `
+        <h3>EVC-PLUS MAIN MENU</h3>
+
+        <p>1. Itus Haraaga</p>
+        <p>2. Kaarka Hadalka</p>
+        <p>3. Bixi Biil</p>
+        <p>4. U Wareeji EVC</p>
+        <p>5. Warbixin Kooban</p>
+        <p>6. Salaam Bank</p>
+        <p>7. Maareynta</p>
+
+        <input type="number"
+            id="menu-option"
+            placeholder="Dooro adeeg">
+
+        <br>
+
+        <button id="menu-send">Send</button>
+
+        <div id="menu-result"></div>
+    `;
+
+    document.getElementById("menu-send")
+        .addEventListener("click", selectService);
+
+}
+
+
+// 4. SELECT SERVICE
+function selectService() {
+
+    const option = document.getElementById("menu-option").value;
+
+    switch (option) {
+
+        case "1":
+            showBalance();
+            break;
+
+        case "2":
+            showAirtime();
+            break;
+
+        case "3":
+            showBill();
+            break;
+
+        case "4":
+            showTransfer();
+            break;
+
+        case "5":
+            showStatement();
+            break;
+
+        case "6":
+            showBank();
+            break;
+
+        case "7":
+            showManagement();
+            break;
+
+        default:
+            alert("Fadlan dooro adeeg sax ah");
+
+    }
+
+}
+
+
+// 5. BALANCE
+function showBalance() {
+
+    evcResult.innerHTML = `
+        <h3>Itus Haraaga</h3>
+        <p>Haraagaagu waa $100.00</p>
+
+        <button onclick="showMenu()">Back to Menu</button>
+    `;
+
+}
+
+
+// 6. TALK CARD
+function showAirtime() {
+
+    evcResult.innerHTML = `
+        <h3>Kaarka Hadalka</h3>
+
+        <p>Geli lambarka telefoonka</p>
+
+        <input id="air-phone" placeholder="61xxxxxxx">
+
+        <p>Geli lacagta</p>
+
+        <input id="air-amount" type="number" placeholder="$ Amount">
+
+        <br>
+
+        <button id="air-send">Continue</button>
+        <button onclick="showMenu()">Back</button>
+    `;
+
+    document.getElementById("air-send").onclick = function () {
+
+        const phone = document.getElementById("air-phone").value;
+        const amount = Number(document.getElementById("air-amount").value);
+
+        if (!phone || amount <= 0) {
+            alert("Fadlan xogta sax u geli");
+            return;
+        }
+
+        evcResult.innerHTML = `
+            <h3>Kaarka Hadalka</h3>
+            <p>Number: ${phone}</p>
+            <p>Amount: $${amount}</p>
+            <p>Hawlgalkan waa tijaabo.</p>
+            <button onclick="showMenu()">Back to Menu</button>
+        `;
+
+    };
+
+}
+
+
+// 7. BILL PAYMENT
+function showBill() {
+
+    evcResult.innerHTML = `
+        <h3>Bixi Biil</h3>
+
+        <p>Geli lambarka biilka</p>
+
+        <input id="bill-number" placeholder="Bill Number">
+
+        <p>Geli lacagta</p>
+
+        <input id="bill-amount" type="number" placeholder="$ Amount">
+
+        <br>
+
+        <button id="bill-send">Continue</button>
+        <button onclick="showMenu()">Back</button>
+    `;
+
+    document.getElementById("bill-send").onclick = function () {
+
+        const number = document.getElementById("bill-number").value;
+        const amount = Number(document.getElementById("bill-amount").value);
+
+        if (!number || amount <= 0) {
+            alert("Fadlan xogta sax u geli");
+            return;
+        }
+
+        evcResult.innerHTML = `
+            <h3>Biilka waa la diyaariyey</h3>
+            <p>Bill Number: ${number}</p>
+            <p>Amount: $${amount}</p>
+            <p>Tani waa tijaabo, lacag lama bixin.</p>
+
+            <button onclick="showMenu()">Back to Menu</button>
+        `;
+
+    };
+
+}
+
+
+// 8. TRANSFER MONEY
+function showTransfer() {
+
+    evcResult.innerHTML = `
+        <h3>U Wareeji EVC</h3>
+
+        <p>Geli lambarka qofka</p>
+
+        <input
+            type="text"
+            id="transfer-phone"
+            placeholder="61xxxxxxx">
+
+        <p>Geli lacagta</p>
+
+        <input
+            type="number"
+            id="transfer-amount"
+            placeholder="$ Amount">
+
+        <br>
+
+        <button id="transfer-next">Continue</button>
+
+        <button onclick="showMenu()">Back</button>
+    `;
+
+    document.getElementById("transfer-next")
+        .addEventListener("click", function () {
+
+            const phone = document.getElementById("transfer-phone").value.trim();
+
+            const amount = Number(document.getElementById("transfer-amount").value);
+
+            if (!phone || amount <= 0) {
+
+                alert("Fadlan geli number iyo lacag sax ah");
+                return;
+
+            }
+
+            transferData.phone = phone;
+            transferData.amount = amount;
+
+            showTransferPIN();
+
+        });
+
+}
+
+
+// 9. ASK PIN BEFORE TRANSFER
+function showTransferPIN() {
+
+    evcResult.innerHTML = `
+        <h3>Xaqiiji Wareejinta</h3>
+
+        <p>Number: ${transferData.phone}</p>
+
+        <p>Amount: $${transferData.amount}</p>
+
+        <p>Fadlan mar kale geli PIN-kaaga</p>
+
+        <input
+            type="password"
+            id="transfer-pin"
+            maxlength="4"
+            placeholder="Enter PIN">
+
+        <br>
+
+        <button id="confirm-transfer">Confirm</button>
+
+        <button onclick="showMenu()">Cancel</button>
+    `;
+
+    document.getElementById("confirm-transfer")
+        .addEventListener("click", confirmTransfer);
+
+}
+
+
+// 10. CONFIRM TRANSFER
+function confirmTransfer() {
+
+    const pin = document.getElementById("transfer-pin").value;
+
+    if (pin !== userPIN) {
+
+        alert("PIN-ka waa khalad! Fadlan isku day mar kale.");
+        return;
+
+    }
+
+    evcResult.innerHTML = `
+        <h3>Transfer Successful! ✅</h3>
+
+        <p>Number: ${transferData.phone}</p>
+
+        <p>Amount: $${transferData.amount}</p>
+
+        <p>Lacagta tijaabada ah waa la wareejiyey.</p>
+
+        <button onclick="showMenu()">Back to Menu</button>
+    `;
+
+}
+
+
+// 11. MINI STATEMENT
+function showStatement() {
+
+    evcResult.innerHTML = `
+        <h3>Warbixin Kooban</h3>
+
+        <p>1. Transfer - $10</p>
+        <p>2. Airtime - $5</p>
+        <p>3. Balance - $100</p>
+
+        <button onclick="showMenu()">Back to Menu</button>
+    `;
+
+}
+
+
+// 12. SALAAM BANK
+function showBank() {
+
+    evcResult.innerHTML = `
+        <h3>Salaam Bank</h3>
+
+        <p>1. Hubi Haraaga</p>
+        <p>2. Adeegyada Bankiga</p>
+
+        <input id="bank-option" type="number" placeholder="Dooro adeeg">
+
+        <br>
+
+        <button id="bank-send">Send</button>
+
+        <button onclick="showMenu()">Back</button>
+
+        <div id="bank-result"></div>
+    `;
+
+    document.getElementById("bank-send").onclick = function () {
+
+        const option = document.getElementById("bank-option").value;
+
+        const output = document.getElementById("bank-result");
+
+        if (option === "1") {
+
+            output.textContent = "Haraaga Bankiga tijaabada ah: $200";
+
+        } else if (option === "2") {
+
+            output.textContent = "Adeegyada Salaam Bank.";
+
+        } else {
+
+            output.textContent = "Dooro adeeg sax ah.";
+
+        }
+
+    };
+
+}
+
+
+// 13. MANAGEMENT
+function showManagement() {
+
+    evcResult.innerHTML = `
+        <h3>Maareynta</h3>
+
+        <p>1. Beddel PIN</p>
+        <p>2. Luqadda</p>
+
+        <input id="manage-option" type="number" placeholder="Dooro adeeg">
+
+        <br>
+
+        <button id="manage-send">Send</button>
+
+        <button onclick="showMenu()">Back</button>
+
+        <div id="manage-result"></div>
+    `;
+
+    document.getElementById("manage-send").onclick = function () {
+
+        const option = document.getElementById("manage-option").value;
+
+        const output = document.getElementById("manage-result");
+
+        if (option === "1") {
+
+            output.innerHTML = `
+                <p>Geli PIN cusub</p>
+                <input type="password" id="new-pin" maxlength="4">
+
+                <br>
+
+                <button id="change-pin">Change PIN</button>
+            `;
+
+            document.getElementById("change-pin").onclick = function () {
+
+                const newPin = document.getElementById("new-pin").value;
+
+                if (!/^\d{4}$/.test(newPin)) {
+
+                    alert("PIN-ku waa inuu noqdaa 4 lambar");
+                    return;
+
+                }
+
+                userPIN = newPin;
+
+                alert("PIN-ka tijaabada ah waa la beddelay!");
+
+                showMenu();
+
+            };
+
+        } else if (option === "2") {
+
+            output.textContent = "Luqadda: Somali";
+
+        } else {
+
+            output.textContent = "Dooro adeeg sax ah.";
+
+        }
+
+    };
+
+}
+
+</script>
+</body>
+</html>
